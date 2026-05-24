@@ -167,6 +167,7 @@ body{
   </div>
 
   <div class="actions">
+
     <button class="back-btn" onclick="history.back()">
       ← Back
     </button>
@@ -174,6 +175,7 @@ body{
     <button id="payBtn">
       Pay Now →
     </button>
+
   </div>
 
 </div>
@@ -252,6 +254,21 @@ document.getElementById("payBtn").onclick = () => {
       "bookings",
       JSON.stringify(bookings)
     );
+
+    const formData = new FormData();
+
+    formData.append("form-name", "turf-booking");
+    formData.append("name", booking.name);
+    formData.append("location", booking.location);
+    formData.append("turf", booking.turfName);
+    formData.append("date", booking.date);
+    formData.append("slot", booking.slot);
+    formData.append("price", booking.price);
+
+    fetch("/", {
+      method:"POST",
+      body:formData
+    });
 
     localStorage.removeItem(
       "pendingPayment"
