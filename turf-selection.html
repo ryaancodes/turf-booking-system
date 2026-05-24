@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Select Turf | Turf It Up</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Outfit',sans-serif;
+  background:#0b1220;
+  min-height:100vh;
+  padding:50px 20px;
+  color:white;
+}
+
+.page-title{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.page-title h1{
+  font-size:3rem;
+  font-weight:800;
+  color:#00ffc3;
+  margin-bottom:10px;
+}
+
+.page-title p{
+  color:#cbd5e1;
+  font-size:1rem;
+}
+
+.booking-form{
+  max-width:650px;
+  margin:0 auto 40px;
+  background:#111827;
+  border:1px solid #1f2937;
+  padding:32px;
+  border-radius:24px;
+  box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+.booking-form h2{
+  color:white;
+  margin-bottom:8px;
+}
+
+.booking-form p{
+  color:#94a3b8;
+  margin-bottom:20px;
+}
+
+select,
+input{
+  width:100%;
+  padding:15px;
+  margin:10px 0;
+  border-radius:12px;
+  border:1px solid #374151;
+  background:#1f2937;
+  color:white;
+  font-size:1rem;
+}
+
+select option{
+  background:#1f2937;
+  color:white;
+}
+
+input::placeholder{
+  color:#9ca3af;
+}
+
+select:focus,
+input:focus{
+  outline:none;
+  border-color:#00ffc3;
+  box-shadow:0 0 0 3px rgba(0,255,195,.15);
+}
+
+button{
+  width:100%;
+  margin-top:15px;
+  padding:15px;
+  border:none;
+  border-radius:14px;
+  background:#00ffc3;
+  color:black;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  transition:.3s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
+.turf-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.turf-card{
+  background:white;
+  color:black;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,.18);
+  transition:.3s;
+  height:340px;
+  display:flex;
+  flex-direction:column;
+}
+
+.turf-card:hover{
+  transform:translateY(-8px);
+}
+
+.turf-card img{
+  width:100%;
+  height:190px;
+  object-fit:cover;
+}
+
+.turf-card-content{
+  padding:18px;
+}
+
+.turf-card h2{
+  color:#054d2f;
+  margin-bottom:8px;
+}
+
+.location{
+  color:#64748b;
+  margin-bottom:10px;
+}
+
+.price{
+  color:#0a7b52;
+  font-weight:700;
+}
+
+@media(max-width:900px){
+
+  .turf-cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:768px){
+
+  body{
+    padding:30px 15px;
+  }
+
+  .page-title h1{
+    font-size:2.2rem;
+  }
+
+  .booking-form{
+    padding:24px;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .turf-cards{
+    grid-template-columns:1fr;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="page-title">
+  <h1>⚽ Book Your Turf</h1>
+  <p>Select your turf, date and preferred time slot.</p>
+</div>
+
+<div class="booking-form">
+
+  <h2>Booking Details</h2>
+  <p>Fill in the details below to continue.</p>
+
+  <select id="turfDropdown">
+    <option value="">Select Turf</option>
+    <option>Kickoff Turf - Bandra</option>
+    <option>GoalRush Grounds - Worli</option>
+    <option>Arena Five - Goregaon</option>
+    <option>The SportZone - Malad</option>
+    <option>GreenField Hub - Juhu</option>
+    <option>Turf Titans - Andheri</option>
+  </select>
+
+  <input type="date" id="bookingDate">
+
+  <input type="text" id="userName" placeholder="Your Name">
+
+  <select id="slotDropdown">
+    <option value="">Select Slot</option>
+    <option value="6 AM">6 AM</option>
+    <option value="7 AM">7 AM</option>
+    <option value="8 AM">8 AM</option>
+    <option value="5 PM">5 PM</option>
+    <option value="6 PM">6 PM</option>
+  </select>
+
+  <button onclick="submitBooking()">
+    Continue to Payment →
+  </button>
+
+</div>
+
+<div class="turf-cards">
+
+  <div class="turf-card">
+    <img src="images/turf1.jpg" alt="Kickoff Turf">
+    <div class="turf-card-content">
+      <h2>Kickoff Turf</h2>
+      <p class="location">📍 Bandra</p>
+      <p class="price">₹750/hr</p>
+    </div>
+  </div>
+
+  <div class="turf-card">
+    <img src="images/turf3.jpg" alt="GoalRush Grounds">
+    <div class="turf-card-content">
+      <h2>GoalRush Grounds</h2>
+      <p class="location">📍 Worli</p>
+      <p class="price">₹800/hr</p>
+    </div>
+  </div>
+
+  <div class="turf-card">
+    <img src="images/turf4.jpg" alt="Arena Five">
+    <div class="turf-card-content">
+      <h2>Arena Five</h2>
+      <p class="location">📍 Goregaon</p>
+      <p class="price">₹700/hr</p>
+    </div>
+  </div>
+
+  <div class="turf-card">
+    <img src="images/turf5.jpg" alt="SportZone">
+    <div class="turf-card-content">
+      <h2>The SportZone</h2>
+      <p class="location">📍 Malad</p>
+      <p class="price">₹650/hr</p>
+    </div>
+  </div>
+
+  <div class="turf-card">
+    <img src="images/turf6.jpg" alt="GreenField Hub">
+    <div class="turf-card-content">
+      <h2>GreenField Hub</h2>
+      <p class="location">📍 Juhu</p>
+      <p class="price">₹620/hr</p>
+    </div>
+  </div>
+
+  <div class="turf-card">
+    <img src="images/turf2.jpg" alt="Turf Titans">
+    <div class="turf-card-content">
+      <h2>Turf Titans</h2>
+      <p class="location">📍 Andheri</p>
+      <p class="price">₹720/hr</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const dateInput = document.getElementById("bookingDate");
+const today = new Date().toISOString().split("T")[0];
+dateInput.setAttribute("min", today);
+
+function submitBooking(){
+
+  const turf=document.getElementById("turfDropdown").value;
+  const date=document.getElementById("bookingDate").value;
+  const name=document.getElementById("userName").value;
+  const slot=document.getElementById("slotDropdown").value;
+
+  if(!turf || !date || !name || !slot){
+    alert("Please fill all fields.");
+    return;
+  }
+
+  const priceMap={
+    "Kickoff Turf - Bandra":750,
+    "GoalRush Grounds - Worli":800,
+    "Arena Five - Goregaon":700,
+    "The SportZone - Malad":650,
+    "GreenField Hub - Juhu":620,
+    "Turf Titans - Andheri":720
+  };
+
+  const price=priceMap[turf];
+
+  localStorage.setItem("pendingPayment",JSON.stringify({
+    name,
+    date,
+    slot,
+    turfName:turf.split(" - ")[0],
+    location:turf.split(" - ")[1],
+    price
+  }));
+
+  window.location.href="payment.html";
+}
+</script>
+
+</body>
+</html>
